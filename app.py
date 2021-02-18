@@ -1,14 +1,14 @@
 # Import necessary libraries
 
-import static as static
+#import static as static
 from flask import Flask, render_template, Response
 import cv2
-import time
+#import time
 import numpy as np
 #import pickle
 from tensorflow import keras
-import sys
-from pygame import mixer
+#import sys
+#from pygame import mixer
 
 
 #model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
