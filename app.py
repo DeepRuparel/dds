@@ -5,15 +5,17 @@ from flask import Flask, render_template, Response
 import cv2
 #import time
 import numpy as np
-#import pickle
+import pickle
 from tensorflow import keras
 #import sys
 #from pygame import mixer
 
 
 #model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
-model = keras.models.load_model("vgg_model.h5")
+#model = keras.models.load_model("vgg_model.h5")
 #model = pickle.load(open('model.pkl', 'rb'))
+pickle.dump("model.pkl", open(model, 'wb'))
+loaded_model = pickle.load(model)
 # Initialize the Flask app
 app = Flask(__name__)
 
