@@ -12,10 +12,9 @@ from tensorflow import keras
 
 
 #model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
-#model = keras.models.load_model("vgg_model.h5")
-#model = pickle.load(open('model.pkl', 'rb'))
-pickle.dump("model.pkl", open(model, 'wb'))
-loaded_model = pickle.load(model)
+model = keras.models.load_model("vgg_model.h5")
+#loaded_model = pickle.load(open('model.pkl', 'rb'))
+
 # Initialize the Flask app
 app = Flask(__name__)
 
