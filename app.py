@@ -8,12 +8,13 @@ import numpy as np
 #import pickle
 #import keras
 from tensorflow import keras
+import tensorflow as tf
 #import sys
 #from pygame import mixer
 
 
-#model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
-model = keras.models.load_model("vgg_model.h5")
+model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
+#model = keras.models.load_model("vgg_model.h5")
 #loaded_model = pickle.load(open('model.pkl', 'rb'))
 
 # Initialize the Flask app
