@@ -56,7 +56,7 @@ def gen_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
-            print("Image " + str(count) + "saved")
+            #print("Image " + str(count) + "saved")
             file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
             cv2.imwrite(file, img)
             count += 1
