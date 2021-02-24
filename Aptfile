@@ -1,4 +1,2 @@
-# Test comment
-s3cmd
-wget
-libgl1
+libproj-dev
+libgeos-dev
