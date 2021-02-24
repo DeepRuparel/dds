@@ -10,6 +10,7 @@ import numpy as np
 #import keras
 from tensorflow import keras
 import tensorflow as tf
+import libgl1-mesa-glx
 #import sys
 #from pygame import mixer
 
