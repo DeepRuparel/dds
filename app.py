@@ -2,7 +2,8 @@
 
 #import static as static
 from flask import Flask, render_template, Response
-import cv2
+#import cv2
+import opencv-python
 #import time
 import numpy as np
 #import pickle
@@ -114,7 +115,7 @@ def video_feed():
 if __name__ == "__main__":
     app.run(debug=True)
 
-import cv2
+'''
 
 videoCaptureObject = cv2.VideoCapture(0)
 result = True
@@ -124,4 +125,5 @@ while (result):
     result = False
 videoCaptureObject.release()
 cv2.destroyAllWindows()
+'''
 
