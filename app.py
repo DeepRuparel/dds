@@ -80,7 +80,7 @@ def gen_frames():
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
             #file = "picsss\\" + str(count) + ".jpg"
-            cv2.imwrite(file, img)
+            #cv2.imwrite(file, img)
             count += 1
             img = cv2.flip(img, 0)
             img = cv2.resize(img, (224, 224))
