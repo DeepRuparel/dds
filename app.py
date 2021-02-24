@@ -2,8 +2,8 @@
 
 #import static as static
 from flask import Flask, render_template, Response
-#import cv2
-import opencv-python
+import cv2
+#import opencv-python
 #import time
 import numpy as np
 #import pickle
@@ -78,7 +78,7 @@ def gen_frames():
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
-            file = "picsss\\" + str(count) + ".jpg"
+            #file = "picsss\\" + str(count) + ".jpg"
             cv2.imwrite(file, img)
             count += 1
             img = cv2.flip(img, 0)
