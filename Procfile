@@ -1,2 +1,2 @@
 
-web: gunicorn dds.app:app
+web: gunicorn app:app
