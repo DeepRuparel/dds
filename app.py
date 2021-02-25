@@ -15,7 +15,7 @@ import tensorflow as tf
 #from pygame import mixer
 
 
-model = tf.keras.models.load_model("C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5")
+model = tf.keras.models.load_model("vgg_model.h5")
 #model = keras.models.load_model("vgg_model.h5")
 #loaded_model = pickle.load(open('model.pkl', 'rb'))
 
