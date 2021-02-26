@@ -44,7 +44,7 @@ tags = {"C0": "safe driving",
         "C9": "talking to passenger"}
 
 @app.route('/predict', methods=["POST"])
-def gen_frames(camera):
+def gen(camera):
 
     count=0
     """ while True:
@@ -120,7 +120,7 @@ def index():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
