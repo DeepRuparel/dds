@@ -20,4 +20,4 @@ class VideoCamera(object):
         # video stream.
         ret, jpeg = cv2.imencode('.jpg', image)
         
-        return jpeg.tobytes(),image
+        return jpeg.tobytes()
