@@ -70,12 +70,14 @@ def gen(camera):
             time.sleep(10)"""
     while True:
         
-        frame,img = camera.get_frame()
+        frame = camera.get_frame()
         yield (b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        img=frame
 
          
-        success, frame = camera.read()  # read the camera frame
+        #success, frame = camera.read()  # read the camera frame
+        success=True
         if not success:
                 break
         else:
