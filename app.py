@@ -98,7 +98,7 @@ def gen_frames():
             #ret, buffer = cv2.imencode('.jpg', frame)
             #frame = buffer.tobytes()
             #yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+                   #b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
             #file = "picsss\\" + str(count) + ".jpg"
