@@ -8,8 +8,13 @@ import cv2
 import numpy as np
 #import pickle
 #import keras
-from tensorflow import keras
 import tensorflow as tf
+
+from sys import stdout
+from camera import Camera
+from flask_socketio import SocketIO
+
+
 
 #import sys
 #from pygame import mixer
@@ -22,10 +27,22 @@ model = tf.keras.models.load_model("vgg_model.h5")
 # Initialize the Flask app
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(0)
+#camera = cv2.VideoCapture(0)
 
 i = 0
 
+app.logger.addHandler(logging.StreamHandler(stdout))
+app.config['DEBUG'] = True
+socketio = SocketIO(app)
+camera = Camera(webopencv())
+
+@socketio.on('input image', namespace='/test')
+def test_message(input):
+    input = input.split(",")[1]
+    camera.enqueue_input(input)
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    app.logger.info("client connected")
 # vgg16_pretrained.load_weights('C:\\Users\\Sahil Shah\\Desktop\\pics\\vgg_model.h5')
 
 tags = {"C0": "safe driving",
@@ -42,6 +59,8 @@ tags = {"C0": "safe driving",
 @app.route('/predict', methods=["POST"])
 def gen_frames():
     count = 0
+    app.logger.info("starting to generate frames!")
+    
 
     """ while True:
         ret, img = camera.read()
@@ -69,13 +88,16 @@ def gen_frames():
         if not success:
             break
         else:
-            ret, img = camera.read()
+            #ret, img = camera.read()
             # cv2.imshow("Test", img)
-
-            time.sleep(3)
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
+            frame = camera.get_frame()
+            img=frame
             yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            time.sleep(3)
+            #ret, buffer = cv2.imencode('.jpg', frame)
+            #frame = buffer.tobytes()
+            #yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
