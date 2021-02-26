@@ -26,7 +26,7 @@ model = tf.keras.models.load_model("vgg_model.h5")
 # Initialize the Flask app
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(-1)
+#camera = cv2.VideoCapture(0)
 
 i = 0
 
@@ -44,17 +44,9 @@ tags = {"C0": "safe driving",
         "C9": "talking to passenger"}
 
 @app.route('/predict', methods=["POST"])
-#def gen_frames():
-def gen(camera):
-    while True:
-        
-        frame,img = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-    count = 0
-    
-    
+def gen_frames(camera):
 
+    count=0
     """ while True:
         ret, img = camera.read()
         cv2.imshow("Test", img)
@@ -76,10 +68,14 @@ def gen(camera):
             cv2.imwrite(file, img)
             count += 1
             time.sleep(10)"""
-    #while True:
+    while True:
         
+        frame,img = camera.get_frame()
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
          
-        #success, frame = camera.read()  # read the camera frame
+        success, frame = camera.read()  # read the camera frame
         if not success:
                 break
         else:
