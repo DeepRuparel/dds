@@ -81,8 +81,7 @@ def gen(camera):
          
         #success, frame = camera.read()  # read the camera frame
         if not success:
-            
-            break
+                break
         else:
             #ret, img = camera.read()
             # cv2.imshow("Test", img)
