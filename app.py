@@ -9,6 +9,7 @@ import numpy as np
 #import pickle
 #import keras
 import tensorflow as tf
+from camera import VideoCamera
 
 
 
@@ -43,7 +44,13 @@ tags = {"C0": "safe driving",
         "C9": "talking to passenger"}
 
 @app.route('/predict', methods=["POST"])
-def gen_frames():
+#def gen_frames():
+def gen(camera):
+    while True:
+        
+        frame,img = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
     count = 0
     
     
@@ -69,22 +76,22 @@ def gen_frames():
             cv2.imwrite(file, img)
             count += 1
             time.sleep(10)"""
-    while True:
+    #while True:
         
          
-        success, frame = camera.read()  # read the camera frame
+        #success, frame = camera.read()  # read the camera frame
         if not success:
             
             break
         else:
-            ret, img = camera.read()
+            #ret, img = camera.read()
             # cv2.imshow("Test", img)
             
             time.sleep(3)
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+            #ret, buffer = cv2.imencode('.jpg', frame)
+            #frame = buffer.tobytes()
+            #yield (b'--frame\r\n'
+                   #b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
             #file = "picsss\\" + str(count) + ".jpg"
