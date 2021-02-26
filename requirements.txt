@@ -21,7 +21,7 @@ eventlet==0.20.0
 gevent==1.2.2
 gevent-websocket==0.10.1
 greenlet==0.4.12
-gunicorn==19.7.1
+
 python-engineio==1.7.0
 
 
