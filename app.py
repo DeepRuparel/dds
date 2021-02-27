@@ -26,7 +26,7 @@ model = tf.keras.models.load_model("vgg_model.h5")
 # Initialize the Flask app
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(-1)
 
 i = 0
 
