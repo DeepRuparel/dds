@@ -74,7 +74,6 @@ def gen_frames():
 
          
         success, frame = camera.read()  # read the camera frame
-        success=True
         if not success:
                 break
         else:
