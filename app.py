@@ -9,7 +9,7 @@ import numpy as np
 #import pickle
 #import keras
 import tensorflow as tf
-from camera import VideoCamera
+#from camera import VideoCamera
 
 
 
@@ -26,7 +26,7 @@ model = tf.keras.models.load_model("vgg_model.h5")
 # Initialize the Flask app
 app = Flask(__name__)
 
-#camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(0)
 
 i = 0
 
@@ -44,7 +44,7 @@ tags = {"C0": "safe driving",
         "C9": "talking to passenger"}
 
 @app.route('/predict', methods=["POST"])
-def gen(camera):
+def gen_frames():
 
     count=0
     """ while True:
@@ -70,18 +70,15 @@ def gen(camera):
             time.sleep(10)"""
     while True:
         
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-        img=frame
+        
 
          
-        #success, frame = camera.read()  # read the camera frame
+        success, frame = camera.read()  # read the camera frame
         success=True
         if not success:
                 break
         else:
-            #ret, img = camera.read()
+            ret, img = camera.read()
             # cv2.imshow("Test", img)
             
             time.sleep(3)
@@ -122,12 +119,12 @@ def index():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
-    #app.run(debug=True)
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=True)
+    
 
 '''
 
