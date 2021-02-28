@@ -79,10 +79,10 @@ def gen_frames():
             #return render_template('index.html', prediction_text= 'Driver is : $ {}'.format(output))
 
 
-            """if(tags[predicted_class]!= "safe driving"):
-                mixer.init()
-                mixer.music.load('C:\\Users\\Sahil Shah\\Desktop\\pics\\alert.mp3')
-                mixer.music.play()"""
+                """if(tags[predicted_class]!= "safe driving"):
+                        mixer.init()
+                        mixer.music.load('C:\\Users\\Sahil Shah\\Desktop\\pics\\alert.mp3')
+                        mixer.music.play()"""
 
 
 
