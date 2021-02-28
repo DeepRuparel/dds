@@ -45,8 +45,9 @@ tags = {"C0": "safe driving",
 
 @app.route('/predict', methods=["POST"])
 def gen_frames():
-
-    count=0
+        
+        
+        count=0
     """ while True:
         ret, img = camera.read()
         cv2.imshow("Test", img)
@@ -68,37 +69,40 @@ def gen_frames():
             cv2.imwrite(file, img)
             count += 1
             time.sleep(10)"""
-    while True:
         
+        while True:
+                
+                
         
 
          
-        success, frame = camera.read()  # read the camera frame
-        if not success:
-                break
-        else:
-            ret, img = camera.read()
+                success, frame = camera.read()  # read the camera frame
+                if not success:
+                        
+                        break
+                else:
+                ret, img = camera.read()
             # cv2.imshow("Test", img)
             
-            time.sleep(3)
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+                time.sleep(3)
+                ret, buffer = cv2.imencode('.jpg', frame)
+                frame = buffer.tobytes()
+                yield (b'--frame\r\n'
+                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             # cv2.imwrite('kang' + str(i) + '.jpg', frame)
             #file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
             #file = "picsss\\" + str(count) + ".jpg"
             #cv2.imwrite(file, img)
-            count += 1
-            img = cv2.flip(img, 0)
-            img = cv2.resize(img, (224, 224))
+                count += 1
+                img = cv2.flip(img, 0)
+                img = cv2.resize(img, (224, 224))
             #img.reshape(-1, 224, 224, 4)
             #img = np.array(img)
-            img = np.array(img).reshape(-1, 224, 224, 3)
-            prediction = model.predict(img)
+                img = np.array(img).reshape(-1, 224, 224, 3)
+                prediction = model.predict(img)
 
-            predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-            print(tags[predicted_class])
+                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                print(tags[predicted_class])
             #output = tags[predicted_class]
             #return render_template('index.html', prediction_text= 'Driver is : $ {}'.format(output))
 
@@ -112,18 +116,19 @@ def gen_frames():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+        
+        return render_template('index.html')
 
 
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+        return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    app.run(host='0.0.0.0')
+        app.run(host='0.0.0.0')
 
 '''
 
