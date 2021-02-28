@@ -26,7 +26,7 @@ model = tf.keras.models.load_model("vgg_model.h5")
 # Initialize the Flask app
 app = Flask(__name__)
 
-camera = cv2.VideoCapture(-1)
+camera = cv2.VideoCapture(0)
 
 i = 0
 
@@ -103,10 +103,7 @@ def gen_frames():
             #return render_template('index.html', prediction_text= 'Driver is : $ {}'.format(output))
 
 
-            """if(tags[predicted_class]!= "safe driving"):
-                mixer.init()
-                mixer.music.load('C:\\Users\\Sahil Shah\\Desktop\\pics\\alert.mp3')
-                mixer.music.play()"""
+           
 
 
 
