@@ -46,42 +46,14 @@ tags = {"C0": "safe driving",
 @app.route('/predict', methods=["POST"])
 def gen_frames():
         
-        
         count=0
-    """ while True:
-        ret, img = camera.read()
-        cv2.imshow("Test", img)
-        if not ret:
-            break
-        k = cv2.waitKey(1)
-        if k % 256 == 27:
-            # For Esc key
-            print("Close")
-            break
-        else:
-            # For Space key
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
-            #print("Image " + str(count) + "saved")
-            file = "C:\\Users\\Sahil Shah\\Desktop\\pics\\" + str(count) + ".jpg"
-            cv2.imwrite(file, img)
-            count += 1
-            time.sleep(10)"""
-        
         while True:
-                
-                
-        
-
-         
                 success, frame = camera.read()  # read the camera frame
                 if not success:
                         
                         break
                 else:
-                ret, img = camera.read()
+                        ret, img = camera.read()
             # cv2.imshow("Test", img)
             
                 time.sleep(3)
