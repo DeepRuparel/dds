@@ -1,4 +1,21 @@
 from PIL import Image
+import cv2
+import tensorflow as tf
+import numpy as np
+import time
+
+model = tf.keras.models.load_model("vgg_model.h5")
+
+tags = {"C0": "safe driving",
+        "C1": "texting - right",
+        "C2": "talking on the phone - right",
+        "C3": "texting - left",
+        "C4": "talking on the phone - left",
+        "C5": "operating the radio",
+        "C6": "drinking",
+        "C7": "reaching behind",
+        "C8": "hair and makeup",
+        "C9": "talking to passenger"}
 
 
 class Makeup_artist(object):
@@ -6,4 +23,14 @@ class Makeup_artist(object):
         pass
 
     def apply_makeup(self, img):
-        return img.transpose(Image.FLIP_LEFT_RIGHT)
+        #return img.transpose(Image.FLIP_LEFT_RIGHT)
+        time.sleep(3)
+        #img = cv2.flip(img, 0)
+        img = cv2.resize(img, (224, 224))
+        img.reshape(-1, 224, 224, 4)
+        img = np.array(img)
+        img = np.array(img).reshape(-1, 224, 224, 3)
+        prediction = model.predict(img)
+        predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+        print(tags[predicted_class])
+        
