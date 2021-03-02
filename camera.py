@@ -19,7 +19,7 @@ tags = {"C0": "safe driving",
         "C8": "hair and makeup",
         "C9": "talking to passenger"}
 
-@camera.route('/process_one',methods=['POST'])
+
 class Camera(object):
     def __init__(self, makeup_artist):
         self.to_process = []
