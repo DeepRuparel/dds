@@ -5,6 +5,23 @@ from flask import Flask, render_template, Response
 from flask_socketio import SocketIO, emit
 from camera import Camera
 from utils import base64_to_pil_image, pil_image_to_base64
+import cv2
+import numpy as np
+import tensorflow as tf
+
+
+model = tf.keras.models.load_model("vgg_model.h5")
+tags = {"C0": "safe driving",
+        "C1": "texting - right",
+        "C2": "talking on the phone - right",
+        "C3": "texting - left",
+        "C4": "talking on the phone - left",
+        "C5": "operating the radio",
+        "C6": "drinking",
+        "C7": "reaching behind",
+        "C8": "hair and makeup",
+        "C9": "talking to passenger"}
+
 
 
 app = Flask(__name__)
@@ -46,6 +63,13 @@ def gen():
         frame = camera.get_frame() #pil_image_to_base64(camera.get_frame())
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        ret, img = camera.read()
+            # cv2.imshow("Test", img)
+        img = cv2.resize(img, (224, 224))
+        img = np.array(img).reshape(-1, 224, 224, 3)
+        prediction = model.predict(img)
+        predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+        print(tags[predicted_class])
 
 
 @app.route('/video_feed')
