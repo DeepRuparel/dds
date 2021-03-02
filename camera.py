@@ -45,4 +45,4 @@ class Camera(object):
     def get_frame(self):
         while not self.to_output:
             sleep(3)
-        #return self.to_output.pop(0)
+        return self.to_output.pop(0)
