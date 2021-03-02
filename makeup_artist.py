@@ -23,6 +23,10 @@ class Makeup_artist(object):
         pass
 
     def apply_makeup(self, img):
+        count=0
+        file = "picsss\\" + str(count) + ".jpg"
+        count+=1
+        cv2.imwrite(file, img)
         #return img.transpose(Image.FLIP_LEFT_RIGHT)
         time.sleep(3)
         #img = cv2.flip(img, 0)
