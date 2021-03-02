@@ -55,7 +55,7 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
-
+@app.route('/gen',methods=['POST'])
 def gen():
     """Video streaming generator function."""
 
@@ -71,7 +71,9 @@ def gen():
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-        print(tags[predicted_class])
+        #print(tags[predicted_class])
+        output=tags[predicted_class]
+        return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 
 
 @app.route('/video_feed')
