@@ -4,6 +4,7 @@ import logging
 from flask import Flask, render_template, Response
 from flask_socketio import SocketIO, emit
 from camera import Camera
+from time import sleep
 from utils import base64_to_pil_image, pil_image_to_base64
 import cv2
 import numpy as np
@@ -65,6 +66,7 @@ def gen():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
         ret, img = camera.read()
             # cv2.imshow("Test", img)
+        sleep(3)
         img = cv2.resize(img, (224, 224))
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
