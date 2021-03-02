@@ -55,7 +55,10 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
-@app.route('/gen',methods=['POST'])
+@app.route('/predict',methods=['POST'])
+def predict():
+        return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
+
 def gen():
     """Video streaming generator function."""
 
@@ -73,7 +76,7 @@ def gen():
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
         #print(tags[predicted_class])
         output=tags[predicted_class]
-        return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+        
 
 
 @app.route('/video_feed')
