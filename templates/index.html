@@ -29,6 +29,7 @@
         </style>
     </head>
     <body>
+        <h1> Live Streaming</h1>
         <div id="container">
             <div>
             <video autoplay="true" id="videoElement"></video>
@@ -37,10 +38,14 @@
                 
             </div>
         </div>
-        <h1> Live Streaming</h1>
+        <form action="{{ url_for('process_one') }}" method="POST">
+            
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button></form>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <br>
+         {{ prediction_text }}   
     </body>
 </html>
