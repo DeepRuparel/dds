@@ -32,5 +32,5 @@ class Makeup_artist(object):
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-        print(tags[predicted_class])
+        return (tags[predicted_class])
         
