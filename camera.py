@@ -38,14 +38,8 @@ class Camera(object):
         input_str = self.to_process.pop(0)
 
         # convert it to a pil image
-        sleep(3)
+        
         input_img = base64_to_pil_image(input_str)
-        input_img = cv2.resize(input_img, (224, 224))
-        input_img = np.array(input_img).reshape(-1, 224, 224, 3)
-        prediction = model.predict(img)
-        predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-        output = (tags[predicted_class])
-        return render_template('index.html', prediction_text='Driver is $ {}'.format(output))
         
         
 
