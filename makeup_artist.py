@@ -41,7 +41,7 @@ class Makeup_artist(object):
         if(output=="safe driving"):
                 d = img.transpose(Image.FLIP_LEFT_RIGHT)
         else:
-                d = img.transpose(Image.FLIP_TOP_BOTTOM))
+                d = img.transpose(Image.FLIP_TOP_BOTTOM)
         return d
         
                 
