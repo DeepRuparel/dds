@@ -9,7 +9,7 @@ from utils import base64_to_pil_image, pil_image_to_base64
 import cv2
 import numpy as np
 import tensorflow as tf
-
+from pygame import mixer
 
 model = tf.keras.models.load_model("vgg_model.h5")
 tags = {"C0": "safe driving",
@@ -77,6 +77,10 @@ def gen():
         #print(tags[predicted_class])
         output=tags[predicted_class]
         #return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
+        if(tags[predicted_class]!= "safe driving"):
+                mixer.init()
+                mixer.music.load('whistle-51364.mp3')
+                mixer.music.play()
 
 
 @app.route('/video_feed')
