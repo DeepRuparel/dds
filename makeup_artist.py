@@ -40,6 +40,8 @@ class Makeup_artist(object):
         output = (tags[predicted_class])
         if(output=="safe driving"):
                 return img.transpose(Image.FLIP_LEFT_RIGHT)
+        else:
+                return true
                 
 
         
