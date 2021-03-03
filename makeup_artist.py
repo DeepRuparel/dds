@@ -37,6 +37,9 @@ class Makeup_artist(object):
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-        app.logger.info(tags[predicted_class])
+        output = (tags[predicted_class])
+        if(output!="safe driving"):
+                return img.transpose(Image.FLIP_LEFT_RIGHT)
+                
 
         
