@@ -77,7 +77,7 @@ def gen():
         #print(tags[predicted_class])
         output=tags[predicted_class]
         #return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
-        if(tags[output!= "safe driving"):
+        if(output!= "safe driving"):
                 mixer.init()
                 mixer.music.load('whistle-51364.mp3')
                 mixer.music.play()
