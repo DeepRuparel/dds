@@ -58,8 +58,8 @@ def index():
 #@app.route('/predict',methods=['POST'])
 #def predict():
 #       return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
-@app.route('/predict',methods=['POST'])
-def predict():
+#@app.route('/predict',methods=['POST'])
+def gen():
     """Video streaming generator function."""
 
     app.logger.info("starting to generate frames!")
@@ -76,13 +76,13 @@ def predict():
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
         #print(tags[predicted_class])
         output=tags[predicted_class]
-        return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
+        #return render_template('index.html', prediction_text='Driver is  $ {}'.format(output))
 
 
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(predict(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':
