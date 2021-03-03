@@ -31,8 +31,8 @@ class Makeup_artist(object):
         time.sleep(3)
         #img = cv2.flip(img, 0)
         img = cv2.resize(img, (224, 224))
-        img.reshape(-1, 224, 224, 4)
-        img = np.array(img)
+        
+        
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
