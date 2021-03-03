@@ -3,6 +3,7 @@ import cv2
 import tensorflow as tf
 import numpy as np
 import time
+import logging
 
 model = tf.keras.models.load_model("vgg_model.h5")
 
@@ -36,5 +37,6 @@ class Makeup_artist(object):
         img = np.array(img).reshape(-1, 224, 224, 3)
         prediction = model.predict(img)
         predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-        return (tags[predicted_class])
+        app.logger.info(tags[predicted_class])
+
         
