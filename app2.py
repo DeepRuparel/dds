@@ -72,21 +72,18 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             alert=st.empty()
-            def __init__(self) -> None:
-                self.type = "noop"
-            def transform(self, frame: av.VideoFrame) -> np.ndarray:
-                image = frame.to_ndarray(format="bgr24")
-                img = cv2.resize(image, (224, 224))
-                img.reshape(-1, 224, 224, 4)
-                img = np.array(img)
-                img = np.array(img).reshape(-1, 224, 224, 3)
-                prediction = model.predict(img)
-                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                alert.warning(predicted_class)
+            image = frame.to_ndarray(format="bgr24")
+            img = cv2.resize(image, (224, 224))
+            img.reshape(-1, 224, 224, 4)
+            img = np.array(img)
+            img = np.array(img).reshape(-1, 224, 224, 3)
+            prediction = model.predict(img)
+            predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+            alert.warning(predicted_class)
             return img
 
     webrtc_ctx = webrtc_streamer(
-        key="opencv-filter",
+        key="object-detection",
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
         video_transformer_factory=OpenCVVideoTransformer,
