@@ -56,46 +56,33 @@ def main():
                
 def app_object_detection():
     class OpenCVVideoTransformer(VideoTransformerBase):
-        type: Literal["noop", "cartoon", "edges", "rotate"]
+        tags = {"C0": "safe driving",
+        "C1": "texting - right",
+        "C2": "talking on the phone - right",
+        "C3": "texting - left",
+        "C4": "talking on the phone - left",
+        "C5": "operating the radio",
+        "C6": "drinking",
+        "C7": "reaching behind",
+        "C8": "hair and makeup",
+        "C9": "talking to passenger"}
 
         def __init__(self) -> None:
             self.type = "noop"
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
-            img = frame.to_ndarray(format="bgr24")
-
-            if self.type == "noop":
-                pass
-            elif self.type == "cartoon":
-                # prepare color
-                img_color = cv2.pyrDown(cv2.pyrDown(img))
-                for _ in range(6):
-                    img_color = cv2.bilateralFilter(img_color, 9, 9, 7)
-                img_color = cv2.pyrUp(cv2.pyrUp(img_color))
-
-                # prepare edges
-                img_edges = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-                img_edges = cv2.adaptiveThreshold(
-                    cv2.medianBlur(img_edges, 7),
-                    255,
-                    cv2.ADAPTIVE_THRESH_MEAN_C,
-                    cv2.THRESH_BINARY,
-                    9,
-                    2,
-                )
-                img_edges = cv2.cvtColor(img_edges, cv2.COLOR_GRAY2RGB)
-
-                # combine color and edges
-                img = cv2.bitwise_and(img_color, img_edges)
-            elif self.type == "edges":
-                # perform edge detection
-                img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
-            elif self.type == "rotate":
-                # rotate image
-                rows, cols, _ = img.shape
-                M = cv2.getRotationMatrix2D((cols / 2, rows / 2), frame.time * 45, 1)
-                img = cv2.warpAffine(img, M, (cols, rows))
-
+            alert=st.empty()
+            def __init__(self) -> None:
+                self.type = "noop"
+            def transform(self, frame: av.VideoFrame) -> np.ndarray:
+                image = frame.to_ndarray(format="bgr24")
+                img = cv2.resize(image, (224, 224))
+                img.reshape(-1, 224, 224, 4)
+                img = np.array(img)
+                img = np.array(img).reshape(-1, 224, 224, 3)
+                prediction = model.predict(img)
+                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                alert.warning(predicted_class)
             return img
 
     webrtc_ctx = webrtc_streamer(
@@ -106,14 +93,10 @@ def app_object_detection():
         async_transform=True,
     )
 
-    if webrtc_ctx.video_transformer:
-        webrtc_ctx.video_transformer.type = st.radio(
-            "Select transform type", ("noop", "cartoon", "edges", "rotate")
-        )
 
     st.markdown(
         "This demo is based on "
-        "https://github.com/aiortc/aiortc/blob/2362e6d1f0c730a0f8c387bbea76546775ad2fe8/examples/server/server.py#L34. "  # noqa: E501
+        "Hardwork by Abhay, Deep, Sahil, Not by Manya"
         "Many thanks to the project."
     )
  
