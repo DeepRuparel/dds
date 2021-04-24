@@ -53,25 +53,7 @@ def main():
     
     if app_mode == object_detection_page:
         app_object_detection()
-        
-if __name__ == "__main__":
-    logging.basicConfig(
-        format="[%(asctime)s] %(levelname)7s from %(name)s in %(pathname)s:%(lineno)d: "
-        "%(message)s",
-        force=True,
-    )
-
-    logger.setLevel(level=logging.DEBUG)
-
-    st_webrtc_logger = logging.getLogger("streamlit_webrtc")
-    st_webrtc_logger.setLevel(logging.DEBUG)
-
-    fsevents_logger = logging.getLogger("fsevents")
-    fsevents_logger.setLevel(logging.WARNING)
-
-    main()
-        
-        
+               
 def app_object_detection():
     tags = {"C0": "safe driving",
         "C1": "texting - right",
@@ -98,11 +80,27 @@ def app_object_detection():
             predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
             alert.warning(predicted_class)
         webrtc_ctx = webrtc_streamer(
-        key="object-detection",
-        mode=WebRtcMode.SENDRECV,
-        client_settings=WEBRTC_CLIENT_SETTINGS,
-        video_transformer_factory=transformer,
-        async_transform=True,
+            key="object-detection",
+            mode=WebRtcMode.SENDRECV,
+            client_settings=WEBRTC_CLIENT_SETTINGS,
+            video_transformer_factory=transformer,
+            async_transform=True,
     )
+if __name__ == "__main__":
+    logging.basicConfig(
+        format="[%(asctime)s] %(levelname)7s from %(name)s in %(pathname)s:%(lineno)d: "
+        "%(message)s",
+        force=True,
+    )
+
+    logger.setLevel(level=logging.DEBUG)
+
+    st_webrtc_logger = logging.getLogger("streamlit_webrtc")
+    st_webrtc_logger.setLevel(logging.DEBUG)
+
+    fsevents_logger = logging.getLogger("fsevents")
+    fsevents_logger.setLevel(logging.WARNING)
+
+    main()
             
     
