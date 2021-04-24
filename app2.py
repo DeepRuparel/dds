@@ -5,6 +5,7 @@ import urllib.request
 from pathlib import Path
 from typing import List, NamedTuple
 import time
+import tensorflow as tf 
 
 try:
     from typing import Literal
@@ -35,7 +36,7 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
 def main():
     st.header("WebRTC demo")
     #object=driver
-    object_detection_page = "Real time object detection (sendrecv)"
+    object_detection_page = "Real time Distracted Driver detection (sendrecv)"
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
         [
@@ -47,15 +48,23 @@ def main():
 
     
     if app_mode == object_detection_page:
-        app_loopback()
-def app_loopback():
-    """ Simple video loopback """
-    webrtc_streamer(
-        key="loopback",
-        mode=WebRtcMode.SENDRECV,
-        client_settings=WEBRTC_CLIENT_SETTINGS,
-        video_transformer_factory=None,  # NoOp
-    )
+        app_object_detection()
+        
+        
+        
+def app_object_detection():
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 if __name__ == "__main__":
     logging.basicConfig(
         format="[%(asctime)s] %(levelname)7s from %(name)s in %(pathname)s:%(lineno)d: "
