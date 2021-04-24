@@ -66,7 +66,7 @@ def app_object_detection():
         "C8": "hair and makeup",
         "C9": "talking to passenger"}
     
-    class MobileVideoTransformer(VideoTransformerBase):
+    class r(VideoTransformerBase):
         alert=st.empty()
         def __init__(self) -> None:
             self.type = "noop"
@@ -83,7 +83,7 @@ def app_object_detection():
         key="object-detection",
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
-        video_transformer_factory=MobileNetSSDVideoTransformer,
+        video_transformer_factory=r,
         async_transform=True,
     )
             
