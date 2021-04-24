@@ -3,16 +3,16 @@ import logging.handlers
 import queue
 import urllib.request
 from pathlib import Path
-from typing import List, NamedTuple
-import time
+#from typing import List, NamedTuple
+#import time
 import tensorflow as tf 
 
 model = tf.keras.models.load_model("vgg_model.h5")
 
-try:
+'''try:
     from typing import Literal
 except ImportError:
-    from typing_extensions import Literal  # type: ignore
+    from typing_extensions import Literal  # type: ignore'''
 
 import av
 import cv2
