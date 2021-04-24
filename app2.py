@@ -9,10 +9,10 @@ import tensorflow as tf
 
 model = tf.keras.models.load_model("vgg_model.h5")
 
-'''try:
+try:
     from typing import Literal
 except ImportError:
-    from typing_extensions import Literal  # type: ignore'''
+    from typing_extensions import Literal  # type: ignore
 
 import av
 import cv2
