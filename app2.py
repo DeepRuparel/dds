@@ -68,8 +68,8 @@ def app_object_detection():
     
     #class r(VideoTransformerBase):
     alert=st.empty()
-        def __init__(self) -> None:
-            self.type = "noop"
+        '''def __init__(self) -> None:
+            self.type = "noop"'''
     def transform(self, frame: av.VideoFrame) -> np.ndarray:
         image = frame.to_ndarray(format="bgr24")
         img = cv2.resize(image, (224, 224))
