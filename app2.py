@@ -86,7 +86,7 @@ def app_object_detection():
             key="object-detection",
             mode=WebRtcMode.SENDRECV,
             client_settings=WEBRTC_CLIENT_SETTINGS,
-            video_transformer_factory=transformer,
+            video_transformer_factory=transformer(),
             async_transform=True,
     )
 if __name__ == "__main__":
