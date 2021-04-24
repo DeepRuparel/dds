@@ -7,6 +7,8 @@ from typing import List, NamedTuple
 import time
 import tensorflow as tf 
 
+model = tf.keras.models.load_model("vgg_model.h5")
+
 try:
     from typing import Literal
 except ImportError:
@@ -53,17 +55,36 @@ def main():
         
         
 def app_object_detection():
+    tags = {"C0": "safe driving",
+        "C1": "texting - right",
+        "C2": "talking on the phone - right",
+        "C3": "texting - left",
+        "C4": "talking on the phone - left",
+        "C5": "operating the radio",
+        "C6": "drinking",
+        "C7": "reaching behind",
+        "C8": "hair and makeup",
+        "C9": "talking to passenger"}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    class MobileVideoTransformer(VideoTransformerBase):
+        alert=st.empty()
+        def transform(self, frame: av.VideoFrame) -> np.ndarray:
+            image = frame.to_ndarray(format="bgr24")
+            img = cv2.resize(image, (224, 224))
+            img.reshape(-1, 224, 224, 4)
+            img = np.array(img)
+            img = np.array(img).reshape(-1, 224, 224, 3)
+            prediction = model.predict(img)
+            predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+            alert.warning(predicted_class)
+        webrtc_ctx = webrtc_streamer(
+        key="object-detection",
+        mode=WebRtcMode.SENDRECV,
+        client_settings=WEBRTC_CLIENT_SETTINGS,
+        video_transformer_factory=MobileNetSSDVideoTransformer,
+        async_transform=True,
+    )
+            
     
 if __name__ == "__main__":
     logging.basicConfig(
