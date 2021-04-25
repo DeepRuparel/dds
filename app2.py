@@ -81,7 +81,7 @@ def app_object_detection():
             predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
             alert.warning(predicted_class)
             st.write(predicted_class)
-            return img
+        return img
 
     webrtc_ctx = webrtc_streamer(
         key="object-detection",
@@ -93,9 +93,8 @@ def app_object_detection():
 
 
     st.markdown(
-        "This demo is based on "
-        "Hardwork by Abhay, Deep, Sahil, Not by Manya"
-        "Many thanks to the project."
+        "This project is created by students of Shah & Anchor Kutchhi Engineering College "
+        "Under the guidance of Prof. Manya Gidhwani"
     )
  
 if __name__ == "__main__":
