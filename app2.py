@@ -80,6 +80,7 @@ def app_object_detection():
             prediction = model.predict(img)
             predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
             alert.warning(predicted_class)
+            st.write(predicted_class)
             return img
 
     webrtc_ctx = webrtc_streamer(
