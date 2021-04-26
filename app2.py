@@ -71,6 +71,10 @@ def app_object_detection():
             self.type = "noop"
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
+            img = frame.to_ndarray(format="bgr24")
+
+            if self.type == "noop":
+                pass
             elif self.type == "cartoon":
                 # prepare color
                 img_color = cv2.pyrDown(cv2.pyrDown(img))
