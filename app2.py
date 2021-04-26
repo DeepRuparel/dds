@@ -77,8 +77,15 @@ def app_object_detection():
                 pass
             
             elif self.type == "edges":
-                # perform edge detection
-                if(model):
+                # perform  detection
+                image = frame.to_ndarray(format="bgr24")
+                img = cv2.resize(image, (224, 224))
+                img.reshape(-1, 224, 224, 4)
+                img = np.array(img)
+                img = np.array(img).reshape(-1, 224, 224, 3)
+                prediction = model.predict(img)
+                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                if(predicted_class!="'):
                     img = cv2.flip(img,-1)
                 
                 #alert.warning(predicted_class)
