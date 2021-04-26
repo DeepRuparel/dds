@@ -85,7 +85,7 @@ def app_object_detection():
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                if(predicted_class!="'):
+                if(predicted_class!=""):
                     img = cv2.flip(img,-1)
                 
                 #alert.warning(predicted_class)
