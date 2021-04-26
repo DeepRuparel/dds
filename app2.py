@@ -98,7 +98,10 @@ def app_object_detection():
                 img = cv2.bitwise_and(img_color, img_edges)
             elif self.type == "edges":
                 # perform edge detection
-                img = cv2.flip(img,-1)
+                if(model):
+                    img = cv2.flip(img,-1)
+                else:
+                    img=cv2.flip(img,0)
                 #alert.warning(predicted_class)
             elif self.type == "rotate":
                 # rotate image
