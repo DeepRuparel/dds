@@ -99,7 +99,7 @@ def app_object_detection():
                 img = cv2.bitwise_and(img_color, img_edges)
             elif self.type == "edges":
                 # perform edge detection
-                img = cv2.flip(img,1)
+                img = cv2.flip(img,-1)
                 alert.warning(predicted_class)
             elif self.type == "rotate":
                 # rotate image
@@ -125,7 +125,7 @@ def app_object_detection():
 
     st.markdown(
         "This project is created by students of Shah & Anchor Kutchhi Engineering College "
-        "Under the guidance of Prof. Manya Gidhwani"
+        "Under the guidance of Prof. Manya Gidwani"
     )
  
 if __name__ == "__main__":
