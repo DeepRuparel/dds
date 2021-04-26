@@ -71,19 +71,38 @@ def app_object_detection():
             self.type = "noop"
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
-            alert=st.empty()
-            image = frame.to_ndarray(format="bgr24")
-            img = cv2.resize(image, (224, 224))
-            img.reshape(-1, 224, 224, 4)
-            img = np.array(img)
-            img = np.array(img).reshape(-1, 224, 224, 3)
-            predict(img)
-        def predict(img):
-            prediction = model.predict(img)
-            predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-            alert.warning(predicted_class)
-            st.write("predicted_class")
+            elif self.type == "cartoon":
+                # prepare color
+                img_color = cv2.pyrDown(cv2.pyrDown(img))
+                for _ in range(6):
+                    img_color = cv2.bilateralFilter(img_color, 9, 9, 7)
+                img_color = cv2.pyrUp(cv2.pyrUp(img_color))
+
+                # prepare edges
+                img_edges = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+                img_edges = cv2.adaptiveThreshold(
+                    cv2.medianBlur(img_edges, 7),
+                    255,
+                    cv2.ADAPTIVE_THRESH_MEAN_C,
+                    cv2.THRESH_BINARY,
+                    9,
+                    2,
+                )
+                img_edges = cv2.cvtColor(img_edges, cv2.COLOR_GRAY2RGB)
+
+                # combine color and edges
+                img = cv2.bitwise_and(img_color, img_edges)
+            elif self.type == "edges":
+                # perform edge detection
+                img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
+            elif self.type == "rotate":
+                # rotate image
+                rows, cols, _ = img.shape
+                M = cv2.getRotationMatrix2D((cols / 2, rows / 2), frame.time * 45, 1)
+                img = cv2.warpAffine(img, M, (cols, rows))
+
             return img
+
 
     webrtc_ctx = webrtc_streamer(
         key="object-detection",
@@ -92,6 +111,10 @@ def app_object_detection():
         video_transformer_factory=OpenCVVideoTransformer,
         async_transform=True,
     )
+    if webrtc_ctx.video_transformer:
+        webrtc_ctx.video_transformer.type = st.radio(
+            "Select transform type", ("noop", "cartoon", "edges", "rotate")
+        )
 
 
     st.markdown(
