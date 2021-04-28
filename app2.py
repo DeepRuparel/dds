@@ -72,7 +72,7 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-            #img1 = frame.to_ndarray(format="bgr24")
+            img1=img.copy()
             if self.type == "none":
                 pass
             
@@ -94,7 +94,7 @@ def app_object_detection():
                 #alert.warning(predicted_class)
             
 
-            return img
+            return img1
 
 
     webrtc_ctx = webrtc_streamer(
