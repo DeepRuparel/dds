@@ -79,9 +79,17 @@ def app_object_detection():
             elif self.type == "predict":
                 # perform  detection
                 #image = frame.to_ndarray(format="bgr24")
+     
                 
-                if(model):
-                    img = cv2.flip(img,-1)
+                img = cv2.resize(img, (224, 224))
+                print("image resized")
+                
+                img.reshape(-1, 224, 224, 4)
+                print(type(img))
+                img = np.array(img)
+                img = np.array(img).reshape(-1, 224, 224, 3)
+                prediction = model.predict(img)
+                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
                 
                 #alert.warning(predicted_class)
             
