@@ -80,7 +80,7 @@ def app_object_detection():
                 # perform  detection
                 #image = frame.to_ndarray(format="bgr24")
      
-                
+                i=0
                 img = cv2.resize(img, (224, 224))
                 print("image resized")
                 
@@ -90,7 +90,7 @@ def app_object_detection():
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                
+                str(st.text(predicted_class))
                 #alert.warning(predicted_class)
             
 
