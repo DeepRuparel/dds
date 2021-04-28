@@ -78,8 +78,8 @@ def app_object_detection():
             
             elif self.type == "predict":
                 # perform  detection
-                image = frame.to_ndarray(format="bgr24")
-                img = cv2.resize(image, (224, 224))
+                #image = frame.to_ndarray(format="bgr24")
+                img = cv2.resize(img, (224, 224))
                 img.reshape(-1, 224, 224, 4)
                 img = np.array(img)
                 img = np.array(img).reshape(-1, 224, 224, 3)
