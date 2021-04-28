@@ -72,26 +72,21 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-            img1 = frame.to_ndarray(format="bgr24")
+            #img1 = frame.to_ndarray(format="bgr24")
             if self.type == "none":
                 pass
             
             elif self.type == "predict":
                 # perform  detection
                 #image = frame.to_ndarray(format="bgr24")
-                img = cv2.resize(img, (224, 224))
-                img.reshape(-1, 224, 224, 4)
-                img = np.array(img)
-                img = np.array(img).reshape(-1, 224, 224, 3)
-                prediction = model.predict(img)
-                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                
                 if(model):
-                    img1 = cv2.flip(img1,-1)
+                    img = cv2.flip(img,-1)
                 
                 #alert.warning(predicted_class)
             
 
-            return img1
+            return img
 
 
     webrtc_ctx = webrtc_streamer(
