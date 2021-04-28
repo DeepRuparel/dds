@@ -84,7 +84,7 @@ def app_object_detection():
                 img = cv2.resize(img, (224, 224))
                 print("image resized")
                 
-                img.reshape(-1, 224, 224, 4)
+                img.reshape(-1, 224, 224,3)
                 print(type(img))
                 img = np.array(img)
                 img = np.array(img).reshape(-1, 224, 224, 3)
