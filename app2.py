@@ -91,7 +91,7 @@ def app_object_detection():
                 #alert.warning(predicted_class)
             
 
-            return img
+            return img1
 
 
     webrtc_ctx = webrtc_streamer(
