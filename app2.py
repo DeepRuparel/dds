@@ -39,6 +39,7 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
 
 def main():
     st.header("WebRTC demo")
+    p=st.empty()
     #object=driver
     object_detection_page = "Real time Distracted Driver detection (sendrecv)"
     app_mode = st.sidebar.selectbox(
@@ -72,7 +73,7 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-            img1=img.copy()
+            img1 = img.copy()
             if self.type == "none":
                 pass
             
@@ -82,16 +83,16 @@ def app_object_detection():
      
                 i=0
                 img = cv2.resize(img, (224, 224))
-                print("image resized")
+                
                 
                 img.reshape(-1, 224, 224,3)
-                print(type(img))
+                
                 img = np.array(img)
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                print(str(predicted_class))
-                st.text(str(predicted_class))
+               
+                p.text(str(predicted_class))
                 
                 #alert.warning(predicted_class)
             
