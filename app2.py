@@ -73,10 +73,10 @@ def app_object_detection():
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
 
-            if self.type == "noop":
+            if self.type == "none":
                 pass
             
-            elif self.type == "edges":
+            elif self.type == "predict":
                 # perform  detection
                 image = frame.to_ndarray(format="bgr24")
                 img = cv2.resize(image, (224, 224))
@@ -85,7 +85,7 @@ def app_object_detection():
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                if(predicted_class!=""):
+                if(predicted_class):
                     img = cv2.flip(img,-1)
                 
                 #alert.warning(predicted_class)
@@ -103,7 +103,7 @@ def app_object_detection():
     )
     if webrtc_ctx.video_transformer:
         webrtc_ctx.video_transformer.type = st.radio(
-            "Select transform type", ("noop","edges")
+            "Select transform type", ("none","predict")
         )
 
 
