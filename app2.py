@@ -90,7 +90,9 @@ def app_object_detection():
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                print(str(predicted_class))
                 st.text(str(predicted_class))
+                
                 #alert.warning(predicted_class)
             
 
