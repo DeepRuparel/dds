@@ -72,7 +72,7 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-
+            img1 = frame.to_ndarray(format="bgr24")
             if self.type == "none":
                 pass
             
@@ -86,7 +86,7 @@ def app_object_detection():
                 prediction = model.predict(img)
                 predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
                 if(model):
-                    img = cv2.flip(img,-1)
+                    img1 = cv2.flip(img1,-1)
                 
                 #alert.warning(predicted_class)
             
