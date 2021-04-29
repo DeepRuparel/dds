@@ -40,7 +40,7 @@ textside = st.sidebar.empty()
 
 def main():
     st.header("WebRTC demo")
-    app_mode=object_detection_page
+    app_object_detection()
     #object=driver
     #object_detection_page = "Real time Distracted Driver detection (sendrecv)"
     #app_mode = st.sidebar.selectbox(
@@ -53,8 +53,8 @@ def main():
     #st.subheader(app_mode)
 
     
-    if app_mode == object_detection_page:
-        app_object_detection()
+    #if app_mode == object_detection_page:
+        #app_object_detection()
                
 def app_object_detection():
     class OpenCVVideoTransformer(VideoTransformerBase):
