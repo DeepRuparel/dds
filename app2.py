@@ -40,8 +40,8 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
 
 def main():
     st.header("Driver Detection")
-    app_object_detection()
-    object=driver
+    #app_object_detection()
+
     object_detection_page = "Real time Distracted Driver detection (sendrecv)"
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
