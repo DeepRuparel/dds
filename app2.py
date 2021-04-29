@@ -73,7 +73,7 @@ def app_object_detection():
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
             img = frame.to_ndarray(format="bgr24")
-            img1 = img.copy()
+            img1 = frame.to_ndarray(format="bgr24")
             if self.type == "none":
                 pass
             
