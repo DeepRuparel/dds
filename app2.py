@@ -34,7 +34,8 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
     rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
     media_stream_constraints={"video": True, "audio": True},
 )
-
+alert= st.empty()
+st.title('Driver Detection')
 
 
 def main():
@@ -57,21 +58,20 @@ def main():
                
 def app_object_detection():
     class OpenCVVideoTransformer(VideoTransformerBase):
-        tags = {"C0": "safe driving",
-        "C1": "texting - right",
-        "C2": "talking on the phone - right",
-        "C3": "texting - left",
-        "C4": "talking on the phone - left",
-        "C5": "operating the radio",
-        "C6": "drinking",
-        "C7": "reaching behind",
-        "C8": "hair and makeup",
-        "C9": "talking to passenger"}
-
+        label= ["C0:safe driving","C1:texting - right","C2:talking on the phone - right",
+        "C3:texting - left",
+        "C4:talking on the phone - left",
+        "C5:operating the radio",
+        "C6:drinking",
+        "C7:reaching behind",
+        "C8:hair and makeup",
+        "C9:talking to passenger"]
+        
         def __init__(self) -> None:
             self.type = "noop"
 
         def transform(self, frame: av.VideoFrame) -> av.VideoFrame:
+            
             img = frame.to_ndarray(format="bgr24")
             img1 = frame.to_ndarray(format="bgr24")
             if self.type == "none":
@@ -79,21 +79,19 @@ def app_object_detection():
             
             elif self.type == "predict":
                 # perform  detection
-                #image = frame.to_ndarray(format="bgr24")
-     
-                i=0
+                
                 img = cv2.resize(img, (224, 224))
-                
-                
-                img.reshape(-1, 224, 224,3)
-                
+                img.reshape(-1, 224, 224, 3)
                 img = np.array(img)
-                #img=np.array(im)/255
                 img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
-                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
-                print(str(prediction))
-                p.text(str(prediction))
+                #predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                #print(str(prediction))
+                #p.text(str(prediction))
+                p = label[np.argmax(prediction)]
+                #textside.subheader("Label :" + str(p))
+                if(p!= "C0:safe driving"):
+                    alert.warning(str(p))
                 
                 #alert.warning(predicted_class)
             
