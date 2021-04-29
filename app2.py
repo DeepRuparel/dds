@@ -34,27 +34,27 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
     rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
     media_stream_constraints={"video": True, "audio": True},
 )
-alert= st.empty()
-st.title('Driver Detection')
-textside = st.sidebar.empty()
+#alert= st.empty()
+#st.title('Driver Detection')
+#textside = st.sidebar.empty()
 
 def main():
-    st.header("WebRTC demo")
+    st.header("Driver Detection")
     app_object_detection()
-    #object=driver
-    #object_detection_page = "Real time Distracted Driver detection (sendrecv)"
-    #app_mode = st.sidebar.selectbox(
-        #"Choose the app mode",
-        #[
-            #object_detection_page,
+    object=driver
+    object_detection_page = "Real time Distracted Driver detection (sendrecv)"
+    app_mode = st.sidebar.selectbox(
+        "Choose the app mode",
+        [
+            object_detection_page,
 
-        #],
-    #)
-    #st.subheader(app_mode)
+        ],
+    )
+    st.subheader(app_mode)
 
     
-    #if app_mode == object_detection_page:
-        #app_object_detection()
+    if app_mode == object_detection_page:
+        app_object_detection()
                
 def app_object_detection():
     class OpenCVVideoTransformer(VideoTransformerBase):
