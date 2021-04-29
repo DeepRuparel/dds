@@ -90,6 +90,7 @@ def app_object_detection():
                 #p.text(str(prediction))
                 p = label[np.argmax(prediction)]
                 textside.subheader("Label :" + str(p))
+                print(str(p))
                 if(p!= "C0:safe driving"):
                     alert.warning(str(p))
                 
