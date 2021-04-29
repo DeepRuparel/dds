@@ -36,21 +36,21 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
 )
 alert= st.empty()
 st.title('Driver Detection')
-
+textside = st.sidebar.empty()
 
 def main():
     st.header("WebRTC demo")
-    p=st.empty()
+    app_mode=object_detection_page
     #object=driver
-    object_detection_page = "Real time Distracted Driver detection (sendrecv)"
-    app_mode = st.sidebar.selectbox(
-        "Choose the app mode",
-        [
-            object_detection_page,
+    #object_detection_page = "Real time Distracted Driver detection (sendrecv)"
+    #app_mode = st.sidebar.selectbox(
+        #"Choose the app mode",
+        #[
+            #object_detection_page,
 
-        ],
-    )
-    st.subheader(app_mode)
+        #],
+    #)
+    #st.subheader(app_mode)
 
     
     if app_mode == object_detection_page:
@@ -89,7 +89,7 @@ def app_object_detection():
                 #print(str(prediction))
                 #p.text(str(prediction))
                 p = label[np.argmax(prediction)]
-                #textside.subheader("Label :" + str(p))
+                textside.subheader("Label :" + str(p))
                 if(p!= "C0:safe driving"):
                     alert.warning(str(p))
                 
