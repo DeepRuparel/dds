@@ -85,13 +85,13 @@ def app_object_detection():
                 img = cv2.resize(img, (224, 224))
                 
                 
-                #img.reshape(-1, 224, 224,3)
+                img.reshape(-1, 224, 224,3)
                 
-                #img = np.array(img)
-                img=np.array(im)/255
-                #img = np.array(img).reshape(-1, 224, 224, 3)
+                img = np.array(img)
+                #img=np.array(im)/255
+                img = np.array(img).reshape(-1, 224, 224, 3)
                 prediction = model.predict(img)
-                #predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
+                predicted_class = 'C' + str(np.where(prediction[i] == np.amax(prediction[i]))[0][0])
                 print(str(prediction))
                 p.text(str(prediction))
                 
